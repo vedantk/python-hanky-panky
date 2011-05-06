@@ -8,5 +8,6 @@ k = knn.knn((
 def test():
 	assert k.predict((1, 1)) == 'red'
 	assert k.predict((4, 4)) == 'blue'
+	print(k.regress((0, 0)))
 
 test()

@@ -39,5 +39,5 @@ class knn:
 		pairs = self.k_nearest(vec)
 		for elt in pairs:
 			for i in range(len(vec)):
-				outcome[i] += elt.vec[i]
-		return map(lambda cell: cell / self.k, outcome)
+				outcome[i] += elt[0].vec[i]
+		return list(map(lambda cell: cell / len(pairs), outcome))
