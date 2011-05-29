@@ -3,16 +3,15 @@
 import math
 from collections import namedtuple
 
+import sys
+sys.path.append('..')
+import util
+
 # trainer = [TrainingEntry, ...]
 TrainingEntry = namedtuple('Entry', ('vec', 'label'))
 
-def dist_euclid(lhs, rhs):
-	return math.sqrt(sum(
-		[(rhs[k] - lhs[k]) ** 2 for k in range(len(lhs))]
-	))
-
 class knn:
-	def __init__(self, trainer, dist=dist_euclid, k=3):
+	def __init__(self, trainer=[], dist=util.dist_euclid, k=3):
 		self.k = k
 		self.dist = dist
 		self.trainer = trainer
@@ -35,7 +34,7 @@ class knn:
 
 	def regress(self, vec):
 		'Given an incomplete input, finds an expected vector.'
-		outcome = [0] * len(vec)
+		outcome = [0.0] * len(vec)
 		pairs = self.k_nearest(vec)
 		for pair in pairs:
 			for i in range(len(vec)):
