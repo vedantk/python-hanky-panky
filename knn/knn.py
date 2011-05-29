@@ -26,17 +26,17 @@ class knn:
 		'Predict a label for the given vector.'
 		labels = {}
 		pairs = self.k_nearest(vec)
-		for pair in pairs:
-			neighbor, dist = pair
-			votes = labels.get(neighbor.label, 0)
-			labels[neighbor.label] = votes + (1 / math.exp(dist))
+		for entry, dist in pairs:
+			votes = labels.get(entry.label, 0)
+			labels[entry.label] = votes + (1 / math.exp(dist))
 		return max(labels.items(), key=lambda elt: elt[1])[0]
 
 	def regress(self, vec):
 		'Given an incomplete input, finds an expected vector.'
-		outcome = [0.0] * len(vec)
+		out = [0.0] * len(vec)
 		pairs = self.k_nearest(vec)
-		for pair in pairs:
+		weights = util.normalize([1 / math.exp(D) for _, D in pairs])
+		for nr, (entry, _) in enumerate(pairs):
 			for i in range(len(vec)):
-				outcome[i] += pair[0].vec[i]
-		return list(map(lambda cell: cell / len(pairs), outcome))
+				out[i] += entry.vec[i] * weights[nr]
+		return out

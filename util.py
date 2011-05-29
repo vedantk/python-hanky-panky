@@ -1,5 +1,5 @@
 import math
-from collections import namedtuple 
+from collections import namedtuple
 
 class Obj:
 	def __init__(self, **kwargs):
@@ -23,7 +23,7 @@ class memoized:
 
 class MultiKeyDict(dict):
 	def __setitem__(self, vec, val):
-		if type(vec) in (list, tuple): 
+		if type(vec) in (list, tuple):
 			for key in vec:
 				super().__setitem__(self, key, val)
 		else:
@@ -53,3 +53,6 @@ def dist_string(target, source, cutoff=None):
                                 return False
         return True if cutoff != None else distance[n][m]
 
+def normalize(li):
+	total = math.fsum(li)
+	return [elt / total for elt in li]
