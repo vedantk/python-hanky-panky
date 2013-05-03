@@ -12,4 +12,4 @@ def onPeerRecv():
 	return (nr, time.time() - beg)
 
 def onJobReturn(result):
-	print "factorial(250) = %d. Time = %f secs." % (result[0], result[1])
+	print("factorial(250) = %d. Time = %f secs." % (result[0], result[1]))
