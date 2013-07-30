@@ -53,7 +53,15 @@ def unique_prime_factorization(n):
 			n /= lpf
 
 def powerset(arr):
-	return []
+	if not len(arr):
+		return [()]
+	else:
+		pset = []
+		subs = powerset(arr[1:])
+		for sub in subs:
+			pset.append(sub)
+			pset.append((arr[0],) + sub)
+		return pset
 
 def nr_subsets_with_dbl_max(arr):
 	nr = 0
